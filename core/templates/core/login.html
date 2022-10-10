@@ -1,0 +1,78 @@
+<!-- extend base template -->
+{% extends 'index.html' %}
+<!-- extend base template -->
+
+<!-- load static -->
+{% load static %}
+<!-- load static -->
+
+<!-- title -->
+
+<!-- extend block -->
+{% block title %} Login {% endblock %}
+<!-- extend block -->
+
+<!-- title -->
+
+<!-- body -->
+
+<!-- extend block -->
+
+{% block body %}
+
+<!-- home page -->
+<div class="container pt-3 pb-5">
+  <div class="mb-3">
+    <h1 class="text-center">Log in to your account</h1>
+  </div>
+  <hr />
+  <!--  -->
+  <div class="card text-bg-light m-auto" , style="width: 60%">
+    <div class="card-body">
+      <form method="POST">
+        <!-- csrf & form -->
+        {% csrf_token %}
+        <!-- csrf & form -->
+
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="e.g. John316"
+            name="username"
+            required
+          />
+          <label for="username">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            name="password"
+            required
+          />
+          <label for="password">Password</label>
+        </div>
+        <button type="submit" class="btn btn-success mb-3 container-fluid">
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+  <!--  -->
+  <div class="mt-3 mb-3">
+    <p class="fs-5 text-center">
+      Don't yet have an account?
+      <br />
+      Create an <a href="{% url 'signup-organizer' %}">organizer</a> account, or
+      create a <a href="{% url 'signup-voter' %}">voter</a> account.
+    </p>
+  </div>
+  <!--  -->
+</div>
+<!-- home page -->
+
+{% endblock %}
+
+<!-- extend block -->

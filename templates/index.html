@@ -1,0 +1,121 @@
+<!-- load static -->
+{% load static %}
+<!-- load static -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- metadata for SEO -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="keywords"
+      content="vote, voting, campus, school, online system, online voting, web application, free fair elections, fair elections"
+    />
+    <meta
+      name="description"
+      content="Voting app is a system that helps students vote fairly, orderly and easily. Log in to vote for your favorite candidate."
+    />
+    <!-- metadata for SEO -->
+
+    <!--  -->
+    <link
+      rel="shortcut icon"
+      href="{% static 'img/favicon.ico' %}"
+      type="image/x-icon"
+    />
+    <link rel="manifest" href="{% static 'json/manifest.json' %}" />
+    <link rel="apple-touch-icon" href="{% static 'img/logo192.png' %}" />
+    <!--  -->
+
+    <!-- custom additions -->
+
+    <!-- bootstrap css -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <!-- bootstrap css -->
+
+    <!-- bootstrap icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+      integrity="sha384-xeJqLiuOvjUBq3iGOjvSQSIlwrpqjSHXpduPd6rQpuiM3f5/ijby8pCsnbu5S81n"
+      crossorigin="anonymous"
+    />
+    <!-- bootstrap icons -->
+
+    <!-- animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- animate.css -->
+
+    <!-- my css -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <!-- my css -->
+
+    <!-- htmx -->
+    <script
+      src="https://unpkg.com/htmx.org@1.8.0"
+      integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- htmx -->
+
+    <!-- jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+    <!-- jquery -->
+
+    <!-- bootstrap js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+    <!-- bootstrap js -->
+
+    <!-- custom additions -->
+
+    <!-- site title -->
+    <title>Voting App | {% block title %} {% endblock %}</title>
+    <!-- site title -->
+  </head>
+  <body>
+    <!-- notifications -->
+    {% include 'notifications.html' %}
+    <!-- notifications -->
+
+    <!-- navigation -->
+    {% include 'navbar.html' %}
+    <!-- navigation -->
+
+    <!-- body -->
+    <div class="main-body">
+      <!-- template entry -->
+      {% block body %}
+      <!--  -->
+      {% endblock %}
+      <!-- template entry -->
+    </div>
+    <!-- body -->
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+    <!-- footer -->
+  </body>
+
+  <!-- custom js scripts -->
+  <script src="{% static 'js/main.js' %}"></script>
+  <!-- custom js scripts -->
+</html>

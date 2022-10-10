@@ -1,0 +1,277 @@
+<!-- extend base template -->
+{% extends 'app.html' %}
+<!-- extend base template -->
+
+<!-- load static -->
+{% load static %}
+<!-- load static -->
+
+<!-- title -->
+
+<!-- extend block -->
+{% block title %} Dashboard {% endblock %}
+<!-- extend block -->
+
+<!-- title -->
+
+<!-- body -->
+
+<!-- extend block -->
+
+{% block body %}
+
+<!-- home page -->
+<div class="dashboard d-flex" style="height: 100vh">
+  <div class="dash-menu bg-light border-end p-3" style="width: 20%">
+    <div class="m-auto" style="width: fit-content">
+      <a class="navbar-brand" href="{% url 'home-page' %}"
+        ><img
+          src="{% static 'img/logo.png' %}"
+          alt="logo"
+          width="75"
+          height="75"
+      /></a>
+    </div>
+    <hr />
+    <div class="mt-3 mb-3">
+      <a
+        href="{% url 'logout-user' %}"
+        class="btn btn-danger container-fluid mb-3"
+      >
+        Log out
+      </a>
+    </div>
+  </div>
+  <div class="dash-body m-3 dash-overflow" style="width: 80%">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'voters-dashboard' %}" style="text-decoration: none"
+            ><i class="bi bi-sliders"></i> Console</a
+          >
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <i class="bi bi-box-seam"></i> Polls
+        </li>
+      </ol>
+    </nav>
+
+    <hr />
+
+    <!-- if -->
+    {% if this_poll %}
+    <!-- if -->
+
+    <h4 style="text-decoration: underline">{{ this_poll.seat }}</h4>
+
+    <br />
+
+    <p class="fs-5">{{ this_poll.intro }}</p>
+
+    <!-- if -->
+    {% if this_poll.open == True %}
+    <!-- if -->
+
+    <button class="btn btn-lg btn-success disabled mb-3">Status: Open</button>
+
+    <!-- else -->
+    {% else %}
+    <!-- else -->
+
+    <button class="btn btn-lg btn-warning disabled mb-3">Status: Closed</button>
+
+    <!-- endif -->
+    {% endif %}
+    <!-- endif -->
+
+    <br />
+
+    <!-- if -->
+    {% if all_candidates %}
+    <!-- if -->
+
+    <h4>Contending candidates:</h4>
+
+    <div class="d-flex flex-wrap align-items-center">
+      <!-- for -->
+      {% for candidate in all_candidates %}
+      <!-- for -->
+
+      <a
+        href="{% url 'view-voter-candidate' candidate.id %}"
+        style="text-decoration: none"
+        class="text-dark"
+      >
+        <div class="card dash-body-elem shadow m-3" style="width: 18rem">
+          <img
+            src="{{ candidate.image.url }}"
+            class="card-img-top"
+            alt="{{ candidate.first_name }}"
+          />
+          <div class="card-body">
+            <p class="card-text">
+              <span class="fw-bold">ID:</span>
+              <span>{{ candidate.personal_identification }}</span>
+            </p>
+            <p class="card-text">
+              <span class="fw-bold">Name:</span>
+              <span>{{ candidate.first_name }} {{ candidate.last_name }}</span>
+            </p>
+            <p class="card-text">
+              <span class="fw-bold">Organization:</span>
+              <span>{{ candidate.organization }}</span>
+            </p>
+          </div>
+        </div>
+      </a>
+
+      <!-- endfor -->
+      {% endfor %}
+      <!-- endfor -->
+    </div>
+
+    <!-- else -->
+    {% else %}
+    <!-- else -->
+
+    <h2 style="text-decoration: underline" class="text-danger">
+      No Candidates have been linked to this poll yet
+    </h2>
+
+    <!-- endif -->
+    {% endif %}
+    <!-- endif -->
+
+    <br />
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <span class="fw-bold">Important dates</span>
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">voting begins:</span>
+        <span>{{ this_poll.begin_date }}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">voting ends:</span>
+        <span>{{ this_poll.end_date }}</span>
+      </li>
+    </ul>
+
+    <br />
+
+    <!-- if -->
+    {% if this_poll.open == True %}
+    <!-- if -->
+
+    <div
+      class="accordion p-1 bg-primary rounded"
+      style="width: 95%"
+      id="accordionFlush"
+    >
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne"
+            aria-expanded="false"
+            aria-controls="flush-collapseOne"
+          >
+            <span class="fw-bold fs-4">Election booth</span>
+            <span class="fs-5 text-muted float">_voter here</span>
+          </button>
+        </h2>
+        <div
+          id="flush-collapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="flush-headingOne"
+          data-bs-parent="#accordionFlush"
+        >
+          <div class="accordion-body">
+            <p class="fs-5">
+              Welcome to the election booth. Simply select your preferred
+              candidate and click vote button.
+            </p>
+          </div>
+          <form
+            action="{% url 'make-vote' this_poll.id %}"
+            method="POST"
+            class="accordion-body row"
+          >
+            <!-- csrf & form -->
+            {% csrf_token %}
+            <!-- csrf & form -->
+
+            <div class="col-5">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                name="poll_id"
+                value="{{ this_poll.id }}"
+                readonly
+              />
+            </div>
+            <div class="col-5">
+              <select
+                class="form-select form-select-lg mb-3"
+                aria-label=".form-select-lg example"
+                name="candidate_id"
+              >
+                <option selected>Preferred candidate</option>
+                <!-- for -->
+                {% for candidate in all_candidates %}
+                <!-- for -->
+
+                <option value="{{ candidate.id }}">
+                  {{ candidate.first_name }} {{ candidate.last_name }}
+                </option>
+
+                <!-- endfor -->
+                {% endfor %}
+                <!-- endfor -->
+              </select>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-lg btn-success">
+                <i class="bi bi-check2-circle"></i> Vote
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- else -->
+    {% else %}
+    <!-- else -->
+
+    <button class="btn btn-lg btn-warning disabled mb-3" style="width: 95%">
+      The election booth is not available due to poll status
+    </button>
+
+    <!-- endif -->
+    {% endif %}
+    <!-- endif -->
+
+    <br />
+
+    <div class="d-flex mb-3">
+      <a
+        href="{% url 'poll-results' this_poll.id %}"
+        class="btn btn-primary m-1"
+        >View results</a
+      >
+    </div>
+
+    <!-- endif -->
+    {% endif %}
+    <!-- endif -->
+  </div>
+</div>
+<!-- home page -->
+
+{% endblock %}
+
+<!-- extend block -->

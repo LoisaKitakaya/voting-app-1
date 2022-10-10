@@ -1,0 +1,68 @@
+<div
+  class="modal fade"
+  id="updatePollModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="updatePollModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Update Poll</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'update-poll' this_poll.id %}" method="POST">
+          <!-- csrf & form -->
+          {% csrf_token %}
+          <!-- csrf & form -->
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="e.g. Union president"
+              name="seat"
+              required
+            />
+            <label for="seat">Contended seat/position</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea
+              class="form-control"
+              placeholder="Describe in short what the poll is about"
+              name="intro"
+              required
+              style="height: 200px"
+            ></textarea>
+            <label for="intro">Poll short description</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="date"
+              class="form-control"
+              name="begin_date"
+              required
+            />
+            <label for="begin_date">Start date</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" name="end_date" required />
+            <label for="end_date">End date</label>
+          </div>
+          <hr />
+          <button type="submit" class="btn btn-success container-fluid">
+            Create
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

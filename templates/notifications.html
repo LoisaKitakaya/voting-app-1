@@ -1,0 +1,64 @@
+<!-- if -->
+{% if messages %}
+<!-- if -->
+
+<!-- for -->
+{% for message in messages %}
+<!-- for -->
+
+<!-- if -->
+{% if message.tags == 'success' %}
+<!-- if -->
+<div
+  class="app-message alert alert-success alert-dismissible fade show"
+  role="alert"
+>
+  <i class="bi bi-check-circle-fill"></i> {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<!-- elif -->
+{% elif message.tags == 'error' %}
+<!-- elif -->
+<div
+  class="app-message alert alert-danger alert-dismissible fade show"
+  role="alert"
+>
+  <i class="bi bi-exclamation-triangle-fill"></i> {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<!-- elif -->
+{% elif message.tags == 'info' %}
+<!-- elif -->
+<div
+  class="app-message alert alert-info alert-dismissible fade show"
+  role="alert"
+>
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<!-- endif -->
+{% endif %}
+<!-- endif -->
+
+<!-- endfor -->
+{% endfor %}
+<!-- endfor -->
+
+<!-- endif -->
+{% endif %}
+<!-- endif -->

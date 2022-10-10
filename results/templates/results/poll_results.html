@@ -1,0 +1,117 @@
+<!-- extend base template -->
+{% extends 'app.html' %}
+<!-- extend base template -->
+
+<!-- load static -->
+{% load static %}
+<!-- load static -->
+
+<!-- title -->
+
+<!-- extend block -->
+{% block title %} Results {% endblock %}
+<!-- extend block -->
+
+<!-- title -->
+
+<!-- body -->
+
+<!-- extend block -->
+
+{% block body %}
+
+<!-- home page -->
+<div class="container pt-3 pb-3">
+  <div class="card shadow mb-3 text-bg-light">
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <h2>Poll results</h2>
+      <div class="d-flex justify-content-between align-items-center">
+        <button
+          class="btn btn-outline-secondary m-1"
+          onclick="window.history.back()"
+        >
+          <i class="bi bi-box-arrow-in-left"></i> Go back
+        </button>
+        <a
+          href="{% url 'home-page' %}"
+          class="btn btn-outline-secondary m-1"
+          style="text-decoration: none"
+        >
+          <i class="bi bi-house"></i> Go home
+        </a>
+        <a
+          href="{% url 'generate-report' id %}"
+          target="_blank"
+          class="btn btn-outline-secondary m-1"
+          style="text-decoration: none"
+        >
+          <i class="bi bi-printer"></i> Generate report
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card shadow mb-3 text-bg-light">
+    <div class="card-body">
+      <br />
+      <div class="card mb-3">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center fs-3"
+            >
+              Total poll votes
+              <span class="badge bg-primary rounded-pill fs-5"
+                >{{ poll_votes }}</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- for -->
+      {% for vote in candidate_votes %}
+      <!-- for -->
+
+      <div class="card mb-3" style="width: 100%">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              src="{{ vote.image }}"
+              class="img-fluid rounded-start"
+              alt="{{ vote.candidate }}"
+              style="width: 250px"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <ul class="list-group list-group-flush p-3">
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center fs-5"
+                >
+                  Candidate
+                  <span class="fs-5">{{ vote.candidate }}</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center fs-5"
+                >
+                  Total votes
+                  <span class="badge bg-primary rounded-pill fs-5"
+                    >{{ vote.total }}</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- endfor -->
+      {% endfor %}
+      <!-- endfor -->
+    </div>
+  </div>
+</div>
+<!-- home page -->
+
+{% endblock %}
+
+<!-- extend block -->

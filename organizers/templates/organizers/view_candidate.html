@@ -1,0 +1,138 @@
+<!-- extend base template -->
+{% extends 'app.html' %}
+<!-- extend base template -->
+
+<!-- load static -->
+{% load static %}
+<!-- load static -->
+
+<!-- title -->
+
+<!-- extend block -->
+{% block title %} Dashboard {% endblock %}
+<!-- extend block -->
+
+<!-- title -->
+
+<!-- body -->
+
+<!-- extend block -->
+
+{% block body %}
+
+<!-- home page -->
+<div class="dashboard d-flex" style="height: 100vh">
+  <div class="dash-menu bg-light border-end p-3" style="width: 20%">
+    <div class="m-auto" style="width: fit-content">
+      <a class="navbar-brand" href="{% url 'home-page' %}"
+        ><img
+          src="{% static 'img/logo.png' %}"
+          alt="logo"
+          width="75"
+          height="75"
+      /></a>
+    </div>
+    <hr />
+    <div class="mt-3 mb-3">
+      <button
+        class="btn btn-dark container-fluid mb-3"
+        data-bs-toggle="modal"
+        data-bs-target="#updateCandidateModal"
+      >
+        Edit candidate
+      </button>
+      <a
+        href="{% url 'delete-candidate' this_candidate.id %}"
+        class="btn btn-danger container-fluid mb-3"
+      >
+        Delete candidate
+      </a>
+    </div>
+  </div>
+  <div class="dash-body m-3 dash-overflow" style="width: 80%">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a
+            href="{% url 'organizers-dashboard' %}"
+            style="text-decoration: none"
+            ><i class="bi bi-sliders"></i> Console</a
+          >
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <i class="bi bi-person-bounding-box"></i> Candidates
+        </li>
+      </ol>
+    </nav>
+
+    <hr />
+
+    <!-- if -->
+    {% if this_candidate %}
+    <!-- if -->
+
+    <img
+      src="{{ this_candidate.image.url }}"
+      class="img-thumbnail mb-3"
+      alt="{{ this_candidate.first_name }}"
+      style="width: 400px"
+    />
+
+    <br />
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <span class="fw-bold">First name:</span>
+        <span>{{ this_candidate.first_name }}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Last name:</span>
+        <span>{{ this_candidate.last_name }}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Email:</span>
+        <span>{{ this_candidate.email }}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">ID:</span>
+        <span>{{ this_candidate.personal_identification }}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Country:</span>
+        <span>{{ this_candidate.country }}</span>
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Organization:</span>
+        <span>{{ this_candidate.organization }}</span>
+      </li>
+    </ul>
+
+    <br />
+
+    <p class="fs-5">
+      <i class="bi bi-box-seam"></i> Vying for:
+      <a
+        href="{% url 'view-poll' this_candidate.poll.id %}"
+        class="btn btn-sm btn-outline-success"
+        >{{ this_candidate.poll.seat }}</a
+      >
+    </p>
+
+    <!-- endif -->
+    {% endif %}
+    <!-- endif -->
+
+    <!-- include poll modal -->
+    {% include 'organizers/update_candidate_form.html' %}
+    <!-- include poll modal -->
+
+    <!-- include candidate modal -->
+    {% include 'organizers/candidate_form.html' %}
+    <!-- include candidate modal -->
+  </div>
+</div>
+<!-- home page -->
+
+{% endblock %}
+
+<!-- extend block -->

@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis&family=Montserrat&display=swap");
+
+body {
+  scroll-behavior: smooth !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.navbar-brand {
+  font-family: "Dosis", sans-serif !important;
+}
+
+.main-body {
+  min-height: 92vh !important;
+}
+
+.footer-links {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.footer-links a {
+  text-decoration: none !important;
+  color: #212428 !important;
+}
+
+.footer-links a:hover {
+  color: blue !important;
+  text-decoration: underline !important;
+}
+
+.intro1-img {
+  background-image: url("https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1s");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.intro3-img {
+  width: 600px;
+  height: 400px;
+}
+
+.intro5-bg {
+  background-image: url("https://images.pexels.com/photos/7709259/pexels-photo-7709259.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  height: 600px;
+}
+
+.app-message,
+.alert {
+  border-radius: 0 !important;
+  position: fixed;
+  right: 1rem !important;
+  bottom: 0.5rem !important;
+  min-width: 30% !important;
+  z-index: 100 !important;
+}
+
+.dash-body-elem {
+  transition-duration: 150ms !important;
+  transition-timing-function: ease-in-out !important;
+}
+
+.dash-body-elem:hover {
+  transform: scale(1.015) !important;
+}
+
+.dash-overflow {
+  overflow-y: auto !important;
+}
+
+#back {
+  margin-left: 4rem !important;
+}

@@ -1,0 +1,72 @@
+<div
+  class="modal fade"
+  id="updateVoterModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="updateVoterModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Update profile</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'update-voter-profile' profile.id %}" method="POST">
+        <!-- csrf & form -->
+        {% csrf_token %}
+        <!-- csrf & form -->
+
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="id_type">ID type</label>
+          <select class="form-select" name="id_type">
+            <option selected>Choose...</option>
+            <option value="national id">National ID</option>
+            <option value="passport">Passport</option>
+          </select>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="ID number"
+            name="personal_id"
+            required
+          />
+          <label for="personal_id">ID number</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="your country"
+            name="country"
+            required
+          />
+          <label for="country">Country</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="your organization"
+            name="organization"
+            required
+          />
+          <label for="organization">Organization</label>
+        </div>
+        <button type="submit" class="btn btn-success mb-3 container-fluid">
+          Register account
+        </button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>

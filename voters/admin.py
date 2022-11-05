@@ -9,7 +9,8 @@ class VoterAdminView(admin.ModelAdmin):
 
     list_display = (
         'user',
-        'organization',
+        'personal_id',
+        'department',
     )
 
     list_filter = (

@@ -16,27 +16,13 @@ def register_organizer(request):
     if request.method == 'POST':
 
         user = request.user
-        id_type = request.POST['id_type']
-        personal_identification = request.POST['personal_id']
-        phone = request.POST['phone']
-        country = request.POST['country']
-        sector = request.POST['sector']
-        organization = request.POST['organization']
-        organization_position = request.POST['organization_position']
-        organization_email = request.POST['organization_email']
-        organization_phone = request.POST['organization_phone']
+        personal_id = request.POST['personal_id']
+        department = request.POST['department']
 
         Organizer.objects.create(
             user=user,
-            id_type=id_type,
-            personal_identification=personal_identification,
-            phone=phone,
-            country=country,
-            sector=sector,
-            organization=organization,
-            organization_position=organization_position,
-            organization_email=organization_email,
-            organization_phone=organization_phone,
+            personal_id=personal_id,
+            department=department,
         )
 
         messages.success(request, 'Your organizer profile has been created.')
@@ -50,17 +36,13 @@ def register_voter(request):
     if request.method == 'POST':
 
         user = request.user
-        id_type = request.POST['id_type']
-        personal_identification = request.POST['personal_id']
-        country = request.POST['country']
-        organization = request.POST['organization']
+        personal_id = request.POST['personal_id']
+        department = request.POST['department']
 
         Voter.objects.create(
             user=user,
-            id_type=id_type,
-            personal_identification=personal_identification,
-            country=country,
-            organization=organization,
+            personal_id=personal_id,
+            department=department,
         )
 
         messages.success(request, 'Your voter profile has been created.')

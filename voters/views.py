@@ -30,17 +30,13 @@ def update_profile(request, id):
 
     if request.method == 'POST':
 
-        id_type = request.POST['id_type']
-        personal_identification = request.POST['personal_id']
-        country = request.POST['country']
-        organization = request.POST['organization']
+        personal_id = request.POST['personal_id']
+        department = request.POST['department']
 
         profile = Voter.objects.get(id=id)
 
-        profile.id_type = id_type
-        profile.personal_identification = personal_identification
-        profile.country = country
-        profile.organization = organization
+        profile.personal_id = personal_id
+        profile.department = department
 
         profile.save()
 

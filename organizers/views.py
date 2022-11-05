@@ -67,24 +67,20 @@ def register_candidate(request):
         poll = Poll.objects.get(id=poll_id)
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
-        email = request.POST['email']
-        id_type = request.POST['id_type']
-        personal_identification = request.POST['personal_id']
+        personal_id = request.POST['personal_id']
         image = request.FILES['image']
-        country = request.POST['country']
-        organization = request.POST['organization']
+        department = request.POST['department']
+        bio = request.POST['bio']
 
         Candidate.objects.create(
             organizer=organizer,
             poll=poll,
             first_name=first_name,
             last_name=last_name,
-            email=email,
-            id_type=id_type,
-            personal_identification=personal_identification,
+            personal_id=personal_id,
             image=image,
-            country=country,
-            organization=organization
+            department=department,
+            bio=bio
         )
 
         messages.success(request, 'Candidate has been registered successfully.')
@@ -184,23 +180,19 @@ def update_candidate(request, id):
 
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
-        email = request.POST['email']
-        id_type = request.POST['id_type']
-        personal_identification = request.POST['personal_id']
+        personal_id = request.POST['personal_id']
         image = request.FILES['image']
-        country = request.POST['country']
-        organization = request.POST['organization']
+        department = request.POST['department']
+        bio = request.POST['bio']
 
         candidate = Candidate.objects.get(id=id)
 
         candidate.first_name = first_name
         candidate.last_name = last_name
-        candidate.email = email
-        candidate.id_type = id_type
-        candidate.personal_identification = personal_identification
+        candidate.personal_id = personal_id
         candidate.image = image
-        candidate.country = country
-        candidate.organization = organization
+        candidate.department = department
+        candidate.bio = bio
 
         candidate.save()
 
@@ -228,27 +220,13 @@ def update_profile(request, id):
 
     if request.method == 'POST':
 
-        id_type = request.POST['id_type']
-        personal_identification = request.POST['personal_id']
-        phone = request.POST['phone']
-        country = request.POST['country']
-        sector = request.POST['sector']
-        organization = request.POST['organization']
-        organization_position = request.POST['organization_position']
-        organization_email = request.POST['organization_email']
-        organization_phone = request.POST['organization_phone']
+        personal_id = request.POST['personal_id']
+        department = request.POST['department']
 
         organizer = Organizer.objects.get(id=id)
 
-        organizer.id_type = id_type
-        organizer.personal_identification = personal_identification
-        organizer.phone = phone
-        organizer.country = country
-        organizer.sector = sector
-        organizer.organization = organization
-        organizer.organization_position = organization_position
-        organizer.organization_email = organization_email
-        organizer.organization_phone = organization_phone
+        organizer.personal_id = personal_id
+        organizer.department = department
 
         organizer.save()
 

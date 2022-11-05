@@ -9,8 +9,9 @@ class CandidateAdminView(admin.ModelAdmin):
 
     list_display = (
         'first_name',
-        'email',
-        'organization',
+        'personal_id',
+        'department',
+        'bio',
     )
 
     list_filter = (

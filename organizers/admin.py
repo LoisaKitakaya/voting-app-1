@@ -9,8 +9,8 @@ class OrganizerAdminView(admin.ModelAdmin):
 
     list_display = (
         'user',
-        'organization',
-        'status',
+        'personal_id',
+        'department',
     )
 
     list_filter = (

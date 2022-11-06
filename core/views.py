@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from voters.models import Voter
 from organizers.models import Organizer
+from django.contrib.auth.models import Group
 from django.contrib import messages
 
 # Create your views here.
@@ -25,6 +26,20 @@ def register_organizer(request):
             department=department,
         )
 
+        try:
+
+            organizer_permissions = Group.objects.get(name="Organizer")
+
+        except Group.DoesNotExist:
+
+            print("Permission does not exist")
+
+            raise Exception("Permission does not exist")
+
+        else:
+
+            organizer_permissions.user_set.add(user)
+
         messages.success(request, 'Your organizer profile has been created.')
 
         return redirect('home-page')
@@ -44,6 +59,20 @@ def register_voter(request):
             personal_id=personal_id,
             department=department,
         )
+
+        try:
+
+            voter_permissions = Group.objects.get(name="Voter")
+
+        except Group.DoesNotExist:
+
+            print("Permission does not exist")
+
+            raise Exception("Permission does not exist")
+
+        else:
+
+            voter_permissions.user_set.add(user)
 
         messages.success(request, 'Your voter profile has been created.')
 

@@ -32,6 +32,27 @@
             <label for="image" class="form-label">Candidate image</label>
             <input type="file" class="form-control" name="image" required />
           </div>
+          <!-- if -->
+          {% if all_polls %}
+          <!-- if -->
+
+          <select class="form-select mb-3" name="poll_id">
+            <option selected>Poll...</option>
+
+            <!-- for -->
+            {% for poll in all_polls %}
+            <!-- for -->
+
+            <option value="{{ poll.id }}">{{ poll.seat }}</option>
+
+            <!-- endfor -->
+            {% endfor %}
+            <!-- endfor -->
+          </select>
+
+          <!-- endif -->
+          {% endif %}
+          <!-- endif -->
           <div class="form-floating mb-3">
             <input
               type="text"

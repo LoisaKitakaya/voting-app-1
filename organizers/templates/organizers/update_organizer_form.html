@@ -24,92 +24,28 @@
           {% csrf_token %}
           <!-- csrf & form -->
 
-          <div class="input-group mb-3">
-            <label class="input-group-text" for="id_type">ID type</label>
-            <select class="form-select" name="id_type">
-              <option selected>Choose...</option>
-              <option value="national id">National ID</option>
-              <option value="passport">Passport</option>
-            </select>
-          </div>
           <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="ID number"
-              name="personal_id"
-              required
-            />
-            <label for="personal_id">ID number</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input
-              type="tel"
-              class="form-control"
-              placeholder="phone number"
-              name="phone"
-              required
-            />
-            <label for="phone">Phone number</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="your country"
-              name="country"
-              required
-            />
-            <label for="country">Country</label>
-          </div>
-          <select class="form-select mb-3" name="sector">
-            <option selected>Sector you represent</option>
-            <option value="University">university</option>
-            <option value="Political party">political party</option>
-            <option value="Union">union</option>
-          </select>
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="your organization"
-              name="organization"
-              required
-            />
-            <label for="organization">Organization</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="your organization position"
-              name="organization_position"
-              required
-            />
-            <label for="organization_position">Organization position</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input
-              type="email"
-              class="form-control"
-              placeholder="your organization email"
-              name="organization_email"
-              required
-            />
-            <label for="organization_email">Organization email</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input
-              type="tel"
-              class="form-control"
-              placeholder="your organization phone"
-              name="organization_phone"
-              required
-            />
-            <label for="organization_phone">Organization phone</label>
-          </div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="ID number"
+            name="personal_id"
+            required
+          />
+          <label for="personal_id">Staff ID</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="your organization"
+            name="department"
+            required
+          />
+          <label for="organization">Department</label>
+        </div>
           <button type="submit" class="btn btn-success mb-3 container-fluid">
-            Register account
+            Update account
           </button>
         </form>
       </div>

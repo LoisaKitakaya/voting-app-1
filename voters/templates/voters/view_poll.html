@@ -68,22 +68,6 @@
 
     <p class="fs-5">{{ this_poll.intro }}</p>
 
-    <!-- if -->
-    {% if this_poll.open == True %}
-    <!-- if -->
-
-    <button class="btn btn-lg btn-success disabled mb-3">Status: Open</button>
-
-    <!-- else -->
-    {% else %}
-    <!-- else -->
-
-    <button class="btn btn-lg btn-warning disabled mb-3">Status: Closed</button>
-
-    <!-- endif -->
-    {% endif %}
-    <!-- endif -->
-
     <br />
 
     <!-- if -->
@@ -198,46 +182,40 @@
           <form
             action="{% url 'make-vote' this_poll.id %}"
             method="POST"
-            class="accordion-body row"
+            class="accordion-body"
           >
             <!-- csrf & form -->
             {% csrf_token %}
             <!-- csrf & form -->
 
-            <div class="col-5">
-              <input
-                type="text"
-                class="form-control form-control-lg"
-                name="poll_id"
-                value="{{ this_poll.id }}"
-                readonly
-              />
-            </div>
-            <div class="col-5">
-              <select
-                class="form-select form-select-lg mb-3"
-                aria-label=".form-select-lg example"
-                name="candidate_id"
-              >
-                <option selected>Preferred candidate</option>
-                <!-- for -->
-                {% for candidate in all_candidates %}
-                <!-- for -->
+            <select
+              class="form-select form-select-lg mb-5"
+              aria-label=".form-select-lg example"
+              name="candidate_id"
+            >
+              <option selected>Preferred candidate</option>
+              <!-- for -->
+              {% for candidate in all_candidates %}
+              <!-- for -->
 
-                <option value="{{ candidate.id }}">
-                  {{ candidate.first_name }} {{ candidate.last_name }}
-                </option>
+              <option value="{{ candidate.id }}">
+                {{ candidate.first_name }} {{ candidate.last_name }}
+              </option>
 
-                <!-- endfor -->
-                {% endfor %}
-                <!-- endfor -->
-              </select>
-            </div>
-            <div class="col-auto">
-              <button type="submit" class="btn btn-lg btn-success">
-                <i class="bi bi-check2-circle"></i> Vote
-              </button>
-            </div>
+              <!-- endfor -->
+              {% endfor %}
+              <!-- endfor -->
+            </select>
+            <input
+              type="text"
+              class="form-control form-control-lg hide-this"
+              name="poll_id"
+              value="{{ this_poll.id }}"
+              readonly
+            />
+            <button type="submit" class="btn btn-lg btn-success">
+              <i class="bi bi-check2-circle"></i> Vote
+            </button>
           </form>
         </div>
       </div>
@@ -248,7 +226,7 @@
     <!-- else -->
 
     <button class="btn btn-lg btn-warning disabled mb-3" style="width: 95%">
-      The election booth is not available due to poll status
+      The election booth is not available. This poll has been closed.
     </button>
 
     <!-- endif -->

@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from voters.models import Voter
 from organizers.models import Organizer
+from django.contrib.auth.models import Group
 from django.contrib import messages
 
 # Create your views here.
@@ -16,28 +17,28 @@ def register_organizer(request):
     if request.method == 'POST':
 
         user = request.user
-        id_type = request.POST['id_type']
-        personal_identification = request.POST['personal_id']
-        phone = request.POST['phone']
-        country = request.POST['country']
-        sector = request.POST['sector']
-        organization = request.POST['organization']
-        organization_position = request.POST['organization_position']
-        organization_email = request.POST['organization_email']
-        organization_phone = request.POST['organization_phone']
+        personal_id = request.POST['personal_id']
+        department = request.POST['department']
 
         Organizer.objects.create(
             user=user,
-            id_type=id_type,
-            personal_identification=personal_identification,
-            phone=phone,
-            country=country,
-            sector=sector,
-            organization=organization,
-            organization_position=organization_position,
-            organization_email=organization_email,
-            organization_phone=organization_phone,
+            personal_id=personal_id,
+            department=department,
         )
+
+        try:
+
+            organizer_permissions = Group.objects.get(name="Organizer")
+
+        except Group.DoesNotExist:
+
+            print("Permission does not exist")
+
+            raise Exception("Permission does not exist")
+
+        else:
+
+            organizer_permissions.user_set.add(user)
 
         messages.success(request, 'Your organizer profile has been created.')
 
@@ -50,18 +51,28 @@ def register_voter(request):
     if request.method == 'POST':
 
         user = request.user
-        id_type = request.POST['id_type']
-        personal_identification = request.POST['personal_id']
-        country = request.POST['country']
-        organization = request.POST['organization']
+        personal_id = request.POST['personal_id']
+        department = request.POST['department']
 
         Voter.objects.create(
             user=user,
-            id_type=id_type,
-            personal_identification=personal_identification,
-            country=country,
-            organization=organization,
+            personal_id=personal_id,
+            department=department,
         )
+
+        try:
+
+            voter_permissions = Group.objects.get(name="Voter")
+
+        except Group.DoesNotExist:
+
+            print("Permission does not exist")
+
+            raise Exception("Permission does not exist")
+
+        else:
+
+            voter_permissions.user_set.add(user)
 
         messages.success(request, 'Your voter profile has been created.')
 

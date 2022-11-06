@@ -50,24 +50,7 @@
               name="last_name"
               required
             />
-            <label for="last_name">Second name</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input
-              type="email"
-              class="form-control"
-              placeholder="johndoe@example.com"
-              name="email"
-            />
-            <label for="email">Email</label>
-          </div>
-          <div class="input-group mb-3">
-            <label class="input-group-text" for="id_type">ID type</label>
-            <select class="form-select" name="id_type">
-              <option selected>Choose...</option>
-              <option value="national id">National ID</option>
-              <option value="passport">Passport</option>
-            </select>
+            <label for="last_name">Last name</label>
           </div>
           <div class="form-floating mb-3">
             <input
@@ -83,25 +66,24 @@
             <input
               type="text"
               class="form-control"
-              placeholder="your country"
-              name="country"
+              placeholder="e.g. school of public health"
+              name="department"
               required
             />
-            <label for="country">Country</label>
+            <label for="country">Department</label>
           </div>
           <div class="form-floating mb-3">
-            <input
-              type="text"
+            <textarea
               class="form-control"
-              placeholder="your organization"
-              name="organization"
+              placeholder="Candidate bio"
+              name="bio"
               required
-            />
-            <label for="organization">Organization</label>
+            ></textarea>
+            <label for="organization">Bio</label>
           </div>
           <hr />
           <button type="submit" class="btn btn-success container-fluid">
-            Register
+            Update
           </button>
         </form>
       </div>

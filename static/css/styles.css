@@ -82,3 +82,7 @@ body {
   width: 0 !important;
   height: 0 !important;
 }
+
+.ml-8 {
+  margin-left: 6.45rem !important;
+}

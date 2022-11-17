@@ -117,4 +117,4 @@ def generate_report(request, id):
     # FileResponse sets the Content-Disposition header so that browsers present the option to save the file.
     buffer.seek(0)
 
-    return FileResponse(buffer, as_attachment=True, filename=f'{poll.seat}_report.pdf')
+    return FileResponse(buffer, as_attachment=False, filename=f'{poll.seat}_report.pdf')

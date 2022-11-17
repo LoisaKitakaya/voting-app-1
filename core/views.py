@@ -12,6 +12,14 @@ def home(request):
 
     return render(request, 'core/landing_page.html')
 
+def tutorial(request):
+
+    return render(request, 'core/tutorials.html')
+
+def about(request):
+
+    return render(request, 'core/about.html')
+
 def register_organizer(request):
 
     if request.method == 'POST':

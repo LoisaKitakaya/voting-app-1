@@ -1,0 +1,118 @@
+<!-- extend base template -->
+{% extends 'index.html' %}
+<!-- extend base template -->
+
+<!-- load static -->
+{% load static %}
+<!-- load static -->
+
+<!-- extend block -->
+{% block title %} How it works {% endblock %}
+<!-- extend block -->
+
+<!-- extend block -->
+{% block body %}
+<!-- extend block -->
+
+<!-- body -->
+
+<div>
+  <!-- intro -->
+  <div class="card text-bg-dark rounded-0">
+    <img
+      src="{% static 'img/python_image_2.jpg' %}"
+      class="card-img"
+      alt="python"
+    />
+    <div class="card-img-overlay p-5 custom-bg">
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <h5 class="card-title my-5">
+        <h1 class="w-100 my-5" style="font-size: 52px">
+          Powered by Python
+          <img src="https://img.icons8.com/color/70/000000/python--v1.png" />
+        </h1>
+      </h5>
+      <p class="card-text fs-4 my-5">
+        The technology for 21st century elections
+      </p>
+    </div>
+  </div>
+  <!-- intro -->
+
+  <!-- tutorial -->
+  <div class="py-4 my-4">
+    <div class="d-flex align-items-center justify-content-evenly container">
+      <h1>Video tutorial</h1>
+      <video
+        poster="{% static 'img/how_to_use_MTTI_voting_system_video_tutorial.png' %}"
+        class="rounded shadow"
+        width="600"
+        controls
+      >
+        <source
+          src="https://res.cloudinary.com/dit0fii18/video/upload/v1583817696/samples/elephants.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support HTML video.
+      </video>
+    </div>
+  </div>
+  <!-- tutorial -->
+
+  <!-- tutorial -->
+  <div class="py-5 bg-light">
+    <div class="d-flex align-items-center justify-content-evenly container">
+      <h1>Short walk-through</h1>
+      <ul class="mx-5">
+        <li class="text-dark fs-5" style="list-style: none">
+          Step one (all users):
+        </li>
+        <li class="text-success fs-5">Create a user account</li>
+        <br />
+        <li class="text-dark fs-5" style="list-style: none">
+          Step two (all users):
+        </li>
+        <li class="text-success fs-5">Register an organizer profile</li>
+        <li class="text-dark fst-italic" style="list-style: none">Or</li>
+        <li class="text-success fs-5">Register a voter profile</li>
+        <br />
+        <li class="text-dark fs-5" style="list-style: none">
+          Step three (as organizer):
+        </li>
+        <li class="text-primary fs-5">Create polls</li>
+        <li class="text-dark fst-italic" style="list-style: none">And</li>
+        <li class="text-primary fs-5">Add candidates to polls</li>
+        <br />
+        <li class="text-dark fs-5" style="list-style: none">
+          Step three (as voter):
+        </li>
+        <li class="text-primary fs-5">Vote for preferred candidate</li>
+        <br />
+      </ul>
+    </div>
+  </div>
+  <!-- tutorial -->
+
+  <div class="my-4 p-4 mx-auto" style="width: fit-content">
+    <a href="{% url 'about' %}" class="btn btn-lg btn-outline-success"
+      >Learn more about MTTI voting system</a
+    >
+  </div>
+
+  <!-- body -->
+
+  <!-- extend block -->
+  {% endblock %}
+  <!-- extend block -->
+</div>

@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from voters.models import Voter
-from organizers.models import Organizer
+from voters.models import Voter, CurrentStudent
+from organizers.models import Organizer, CurrentEmployee
 from django.contrib.auth.models import Group
 from django.contrib import messages
+from .delete_user import delete_revoked_user
 
 # Create your views here.
 
@@ -28,29 +29,47 @@ def register_organizer(request):
         personal_id = request.POST['personal_id']
         department = request.POST['department']
 
-        Organizer.objects.create(
-            user=user,
-            personal_id=personal_id,
-            department=department,
-        )
-
         try:
 
-            organizer_permissions = Group.objects.get(name="Organizer")
+            CurrentEmployee.objects.get(personal_id=personal_id)
 
-        except Group.DoesNotExist:
+        except:
 
-            print("Permission does not exist")
+            print("Not current university employee")
 
-            raise Exception("Permission does not exist")
+            logout(request)
+
+            delete_revoked_user(id=user.id)
+
+            messages.error(request, 'Only staff who are currently employed by the university reserve this privilege')
+
+            return redirect('home-page')
 
         else:
 
-            organizer_permissions.user_set.add(user)
+            Organizer.objects.create(
+                user=user,
+                personal_id=personal_id,
+                department=department,
+            )
 
-        messages.success(request, 'Your organizer profile has been created.')
+            try:
 
-        return redirect('home-page')
+                organizer_permissions = Group.objects.get(name="Organizer")
+
+            except Group.DoesNotExist:
+
+                print("Permission does not exist")
+
+                raise Exception("Permission does not exist")
+
+            else:
+
+                organizer_permissions.user_set.add(user)
+
+            messages.success(request, 'Your organizer profile has been created.')
+
+            return redirect('home-page')
 
     return render(request, 'core/register_organizer.html')
 
@@ -62,29 +81,47 @@ def register_voter(request):
         personal_id = request.POST['personal_id']
         department = request.POST['department']
 
-        Voter.objects.create(
-            user=user,
-            personal_id=personal_id,
-            department=department,
-        )
-
         try:
 
-            voter_permissions = Group.objects.get(name="Voter")
+            CurrentStudent.objects.get(personal_id=personal_id)
 
-        except Group.DoesNotExist:
+        except:
 
-            print("Permission does not exist")
+            print("Not current university student")
 
-            raise Exception("Permission does not exist")
+            logout(request)
+
+            delete_revoked_user(id=user.id)
+
+            messages.error(request, 'Only students who are currently enrolled in the university reserve this privilege')
+
+            return redirect('home-page')
 
         else:
 
-            voter_permissions.user_set.add(user)
+            Voter.objects.create(
+                user=user,
+                personal_id=personal_id,
+                department=department,
+            )
 
-        messages.success(request, 'Your voter profile has been created.')
+            try:
 
-        return redirect('home-page')
+                voter_permissions = Group.objects.get(name="Voter")
+
+            except Group.DoesNotExist:
+
+                print("Permission does not exist")
+
+                raise Exception("Permission does not exist")
+
+            else:
+
+                voter_permissions.user_set.add(user)
+
+            messages.success(request, 'Your voter profile has been created.')
+
+            return redirect('home-page')
 
     return render(request, 'core/register_voter.html')
 
@@ -138,34 +175,40 @@ def signup_organizer(request):
 
         if not user_already_exists:
 
-            if password1 == password2:
+            if len(password1) >= 8 and len(password2) >= 8:
 
-                User.objects.create(
-                    username=username,
-                    email=email,
-                    first_name=first_name,
-                    last_name=last_name
-                )
+                if password1 == password2:
 
-                new_user = User.objects.get(email=email)
+                    User.objects.create(
+                        username=username,
+                        email=email,
+                        first_name=first_name,
+                        last_name=last_name
+                    )
 
-                new_user.set_password(password1)
+                    new_user = User.objects.get(email=email)
 
-                new_user.save()
+                    new_user.set_password(password1)
 
-                user = authenticate(request, username=username, password=password1)
+                    new_user.save()
 
-                if user is not None:
+                    user = authenticate(request, username=username, password=password1)
 
-                    login(request, user)
+                    if user is not None:
 
-                messages.success(request, 'Your user account has been created. Logged in successfully!')
+                        login(request, user)
 
-                return redirect('register-organizer')
+                    messages.success(request, 'Your user account has been created. Logged in successfully!')
+
+                    return redirect('register-organizer')
+
+                else:
+
+                    messages.error(request, 'Passwords did not match')
 
             else:
 
-                messages.error(request, 'Passwords did not match')
+                messages.error(request, 'Passwords must have 8 or more characters')
 
         else:
 
@@ -188,34 +231,40 @@ def signup_voter(request):
 
         if not user_already_exists:
 
-            if password1 == password2:
+            if len(password1) >= 8 and len(password2) >= 8:
 
-                User.objects.create(
-                    username=username,
-                    email=email,
-                    first_name=first_name,
-                    last_name=last_name
-                )
+                if password1 == password2:
 
-                new_user = User.objects.get(email=email)
+                    User.objects.create(
+                        username=username,
+                        email=email,
+                        first_name=first_name,
+                        last_name=last_name
+                    )
 
-                new_user.set_password(password1)
+                    new_user = User.objects.get(email=email)
 
-                new_user.save()
+                    new_user.set_password(password1)
 
-                user = authenticate(request, username=username, password=password1)
+                    new_user.save()
 
-                if user is not None:
+                    user = authenticate(request, username=username, password=password1)
 
-                    login(request, user)
+                    if user is not None:
 
-                messages.success(request, 'Your user account has been created. Logged in successfully!')
+                        login(request, user)
 
-                return redirect('register-voter')
+                    messages.success(request, 'Your user account has been created. Logged in successfully!')
+
+                    return redirect('register-voter')
+
+                else:
+
+                    messages.error(request, 'Passwords did not match')
 
             else:
 
-                messages.error(request, 'Passwords did not match')
+                messages.error(request, 'Passwords must have 8 or more characters')
 
         else:
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Organizer
+from .models import Organizer, CurrentEmployee
 
 # Register your models here.
 @admin.register(Organizer)
@@ -9,6 +9,23 @@ class OrganizerAdminView(admin.ModelAdmin):
 
     list_display = (
         'user',
+        'personal_id',
+        'department',
+    )
+
+    list_filter = (
+        'created_date',
+        'updated_date',
+    )
+
+@admin.register(CurrentEmployee)
+class CurrentEmployeeAdminView(admin.ModelAdmin):
+
+    model = CurrentEmployee
+
+    list_display = (
+        'first_name',
+        'last_name',
         'personal_id',
         'department',
     )

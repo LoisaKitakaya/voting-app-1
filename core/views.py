@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from voters.models import Voter
-from organizers.models import Organizer
+from voters.models import Voter, CurrentStudent
+from organizers.models import Organizer, CurrentEmployee
 from django.contrib.auth.models import Group
 from django.contrib import messages
 
@@ -28,29 +28,43 @@ def register_organizer(request):
         personal_id = request.POST['personal_id']
         department = request.POST['department']
 
-        Organizer.objects.create(
-            user=user,
-            personal_id=personal_id,
-            department=department,
-        )
-
         try:
 
-            organizer_permissions = Group.objects.get(name="Organizer")
+            CurrentEmployee.objects.get(personal_id=personal_id)
 
-        except Group.DoesNotExist:
+        except:
 
-            print("Permission does not exist")
+            print("Not current university employee")
 
-            raise Exception("Permission does not exist")
+            messages.error(request, 'Only staff who are currently employed by the university reserve this privilege')
+
+            return render(request, 'core/register_organizer.html')
 
         else:
 
-            organizer_permissions.user_set.add(user)
+            Organizer.objects.create(
+                user=user,
+                personal_id=personal_id,
+                department=department,
+            )
 
-        messages.success(request, 'Your organizer profile has been created.')
+            try:
 
-        return redirect('home-page')
+                organizer_permissions = Group.objects.get(name="Organizer")
+
+            except Group.DoesNotExist:
+
+                print("Permission does not exist")
+
+                raise Exception("Permission does not exist")
+
+            else:
+
+                organizer_permissions.user_set.add(user)
+
+            messages.success(request, 'Your organizer profile has been created.')
+
+            return redirect('home-page')
 
     return render(request, 'core/register_organizer.html')
 
@@ -62,29 +76,43 @@ def register_voter(request):
         personal_id = request.POST['personal_id']
         department = request.POST['department']
 
-        Voter.objects.create(
-            user=user,
-            personal_id=personal_id,
-            department=department,
-        )
-
         try:
 
-            voter_permissions = Group.objects.get(name="Voter")
+            CurrentStudent.objects.get(personal_id=personal_id)
 
-        except Group.DoesNotExist:
+        except:
 
-            print("Permission does not exist")
+            print("Not current university student")
 
-            raise Exception("Permission does not exist")
+            messages.error(request, 'Only students who are currently enrolled in the university reserve this privilege')
+
+            return render(request, 'core/register_voter.html')
 
         else:
 
-            voter_permissions.user_set.add(user)
+            Voter.objects.create(
+                user=user,
+                personal_id=personal_id,
+                department=department,
+            )
 
-        messages.success(request, 'Your voter profile has been created.')
+            try:
 
-        return redirect('home-page')
+                voter_permissions = Group.objects.get(name="Voter")
+
+            except Group.DoesNotExist:
+
+                print("Permission does not exist")
+
+                raise Exception("Permission does not exist")
+
+            else:
+
+                voter_permissions.user_set.add(user)
+
+            messages.success(request, 'Your voter profile has been created.')
+
+            return redirect('home-page')
 
     return render(request, 'core/register_voter.html')
 

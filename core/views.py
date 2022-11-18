@@ -5,6 +5,7 @@ from voters.models import Voter, CurrentStudent
 from organizers.models import Organizer, CurrentEmployee
 from django.contrib.auth.models import Group
 from django.contrib import messages
+from .delete_user import delete_revoked_user
 
 # Create your views here.
 
@@ -36,9 +37,13 @@ def register_organizer(request):
 
             print("Not current university employee")
 
+            logout(request)
+
+            delete_revoked_user(id=user.id)
+
             messages.error(request, 'Only staff who are currently employed by the university reserve this privilege')
 
-            return render(request, 'core/register_organizer.html')
+            return redirect('home-page')
 
         else:
 
@@ -84,9 +89,13 @@ def register_voter(request):
 
             print("Not current university student")
 
+            logout(request)
+
+            delete_revoked_user(id=user.id)
+
             messages.error(request, 'Only students who are currently enrolled in the university reserve this privilege')
 
-            return render(request, 'core/register_voter.html')
+            return redirect('home-page')
 
         else:
 
@@ -166,34 +175,40 @@ def signup_organizer(request):
 
         if not user_already_exists:
 
-            if password1 == password2:
+            if len(password1) >= 8 and len(password2) >= 8:
 
-                User.objects.create(
-                    username=username,
-                    email=email,
-                    first_name=first_name,
-                    last_name=last_name
-                )
+                if password1 == password2:
 
-                new_user = User.objects.get(email=email)
+                    User.objects.create(
+                        username=username,
+                        email=email,
+                        first_name=first_name,
+                        last_name=last_name
+                    )
 
-                new_user.set_password(password1)
+                    new_user = User.objects.get(email=email)
 
-                new_user.save()
+                    new_user.set_password(password1)
 
-                user = authenticate(request, username=username, password=password1)
+                    new_user.save()
 
-                if user is not None:
+                    user = authenticate(request, username=username, password=password1)
 
-                    login(request, user)
+                    if user is not None:
 
-                messages.success(request, 'Your user account has been created. Logged in successfully!')
+                        login(request, user)
 
-                return redirect('register-organizer')
+                    messages.success(request, 'Your user account has been created. Logged in successfully!')
+
+                    return redirect('register-organizer')
+
+                else:
+
+                    messages.error(request, 'Passwords did not match')
 
             else:
 
-                messages.error(request, 'Passwords did not match')
+                messages.error(request, 'Passwords must have 8 or more characters')
 
         else:
 
@@ -216,34 +231,40 @@ def signup_voter(request):
 
         if not user_already_exists:
 
-            if password1 == password2:
+            if len(password1) >= 8 and len(password2) >= 8:
 
-                User.objects.create(
-                    username=username,
-                    email=email,
-                    first_name=first_name,
-                    last_name=last_name
-                )
+                if password1 == password2:
 
-                new_user = User.objects.get(email=email)
+                    User.objects.create(
+                        username=username,
+                        email=email,
+                        first_name=first_name,
+                        last_name=last_name
+                    )
 
-                new_user.set_password(password1)
+                    new_user = User.objects.get(email=email)
 
-                new_user.save()
+                    new_user.set_password(password1)
 
-                user = authenticate(request, username=username, password=password1)
+                    new_user.save()
 
-                if user is not None:
+                    user = authenticate(request, username=username, password=password1)
 
-                    login(request, user)
+                    if user is not None:
 
-                messages.success(request, 'Your user account has been created. Logged in successfully!')
+                        login(request, user)
 
-                return redirect('register-voter')
+                    messages.success(request, 'Your user account has been created. Logged in successfully!')
+
+                    return redirect('register-voter')
+
+                else:
+
+                    messages.error(request, 'Passwords did not match')
 
             else:
 
-                messages.error(request, 'Passwords did not match')
+                messages.error(request, 'Passwords must have 8 or more characters')
 
         else:
 

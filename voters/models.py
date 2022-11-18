@@ -19,3 +19,22 @@ class Voter(models.Model):
     def __str__(self) -> str:
         
         return self.user.username
+
+class CurrentStudent(models.Model):
+
+    first_name = models.CharField(max_length=254, blank=False)
+    last_name = models.CharField(max_length=254, blank=False)
+    personal_id = models.CharField(max_length=254, blank=False)
+    department = models.CharField(max_length=254, blank=False)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+
+        ordering = ["-created_date"]
+
+        db_table = "Current Students"
+
+    def __str__(self) -> str:
+        
+        return f'{self.first_name} {self.last_name}'

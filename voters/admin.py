@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Voter
+from .models import Voter, CurrentStudent
 
 # Register your models here.
 @admin.register(Voter)
@@ -9,6 +9,23 @@ class VoterAdminView(admin.ModelAdmin):
 
     list_display = (
         'user',
+        'personal_id',
+        'department',
+    )
+
+    list_filter = (
+        'created_date',
+        'updated_date',
+    )
+
+@admin.register(CurrentStudent)
+class CurrentStudentAdminView(admin.ModelAdmin):
+
+    model = CurrentStudent
+
+    list_display = (
+        'first_name',
+        'last_name',
         'personal_id',
         'department',
     )

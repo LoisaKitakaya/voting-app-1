@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Voter(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="voter")
-    personal_id = models.CharField(max_length=254, blank=False)
+    student_id = models.CharField(max_length=254, blank=False, unique=True)
     department = models.CharField(max_length=254, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -24,7 +24,7 @@ class CurrentStudent(models.Model):
 
     first_name = models.CharField(max_length=254, blank=False)
     last_name = models.CharField(max_length=254, blank=False)
-    personal_id = models.CharField(max_length=254, blank=False)
+    student_id = models.CharField(max_length=254, blank=False, unique=True)
     department = models.CharField(max_length=254, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

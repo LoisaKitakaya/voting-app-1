@@ -9,7 +9,7 @@ class VoterAdminView(admin.ModelAdmin):
 
     list_display = (
         'user',
-        'personal_id',
+        'student_id',
         'department',
     )
 
@@ -26,7 +26,7 @@ class CurrentStudentAdminView(admin.ModelAdmin):
     list_display = (
         'first_name',
         'last_name',
-        'personal_id',
+        'student_id',
         'department',
     )
 

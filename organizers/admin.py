@@ -9,7 +9,7 @@ class OrganizerAdminView(admin.ModelAdmin):
 
     list_display = (
         'user',
-        'personal_id',
+        'staff_id',
         'department',
     )
 
@@ -26,7 +26,7 @@ class CurrentEmployeeAdminView(admin.ModelAdmin):
     list_display = (
         'first_name',
         'last_name',
-        'personal_id',
+        'staff_id',
         'department',
     )
 

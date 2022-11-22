@@ -31,7 +31,7 @@ def register_organizer(request):
 
         try:
 
-            CurrentEmployee.objects.get(personal_id=personal_id)
+            CurrentEmployee.objects.get(staff_id=personal_id)
 
         except:
 
@@ -49,7 +49,7 @@ def register_organizer(request):
 
             Organizer.objects.create(
                 user=user,
-                personal_id=personal_id,
+                staff_id=personal_id,
                 department=department,
             )
 
@@ -83,7 +83,7 @@ def register_voter(request):
 
         try:
 
-            CurrentStudent.objects.get(personal_id=personal_id)
+            CurrentStudent.objects.get(student_id=personal_id)
 
         except:
 
@@ -101,7 +101,7 @@ def register_voter(request):
 
             Voter.objects.create(
                 user=user,
-                personal_id=personal_id,
+                student_id=personal_id,
                 department=department,
             )
 

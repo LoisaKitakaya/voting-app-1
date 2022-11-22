@@ -9,7 +9,7 @@ class CandidateAdminView(admin.ModelAdmin):
 
     list_display = (
         'first_name',
-        'personal_id',
+        'candidate_id',
         'department',
         'bio',
     )

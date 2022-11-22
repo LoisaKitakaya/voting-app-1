@@ -77,7 +77,7 @@ def register_candidate(request):
             poll=poll,
             first_name=first_name,
             last_name=last_name,
-            personal_id=personal_id,
+            candidate_id=personal_id,
             image=image,
             department=department,
             bio=bio

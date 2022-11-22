@@ -32,7 +32,7 @@ body {
 }
 
 .intro1-img {
-  background-image: url("https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1s");
+  background-image: url("https://netstorage-tuko.akamaized.net/images/c1803fea1ec67695.png?imwidth=1080");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -43,7 +43,7 @@ body {
 }
 
 .intro5-bg {
-  background-image: url("https://images.pexels.com/photos/7709259/pexels-photo-7709259.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-image: url("https://images.pexels.com/photos/7814290/pexels-photo-7814290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
   background-size: cover;
   height: 600px;
 }

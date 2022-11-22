@@ -115,8 +115,8 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # for production
 
-DATABASE_URL = env('DATABASE_URL')
-# DATABASE_URL = os.environ.get('DATABASE_URL')
+# DATABASE_URL = env('DATABASE_URL')
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 DATABASES = {
     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),

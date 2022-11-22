@@ -45,13 +45,34 @@
           <label for="personal_id">Student ID</label>
         </div>
         <div class="form-floating mb-3">
-          <input
-            type="text"
+          <select
             class="form-control"
             placeholder="your organization"
             name="department"
             required
-          />
+          >
+            <option selected>Choose your department</option>
+            <option value="Procurement and Logistics">
+              Department of Procurement and Logistics
+            </option>
+            <option value="Economics">Department of Economics</option>
+            <option value="Accounting and Finance">
+              Department of Accounting and Finance
+            </option>
+            <option value="Business Administration">
+              Department of Business Administration
+            </option>
+            <option value="Engineering">Department of Engineering</option>
+            <option value="Construction and Textile">
+              Department of Construction and Textile
+            </option>
+            <option value="Entrepreneurship and Technology">
+              Department of Entrepreneurship and Technology
+            </option>
+            <option value="Leadership and Management">
+              Department of Leadership and Management
+            </option>
+          </select>
           <label for="organization">Department</label>
         </div>
         <button type="submit" class="btn btn-success mb-3 container-fluid">
